@@ -1,0 +1,9 @@
+[MASTER]
+disable=missing-docstring,too-few-public-methods
+
+[FORMAT]
+max-line-length=88
+
+[MESSAGES CONTROL]
+disable=all
+enable=unused-import,invalid-name,too-few-public-methods

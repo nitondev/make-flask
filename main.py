@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 def create_project(path):
     """Creates a project directory at the given path."""
     # Expand user (~) and normalize the path
@@ -31,6 +32,7 @@ def create_project(path):
         print(f"Error creating project: {e}")
         return False
 
+
 def prompt_project_name():
     """Prompt the user for a valid project name or path."""
     while True:
@@ -38,6 +40,7 @@ def prompt_project_name():
         if project_input:
             return project_input
         print("Error: No project name or path provided.")
+
 
 def main():
     if len(sys.argv) == 2:
@@ -47,6 +50,7 @@ def main():
 
     while not create_project(project_input):
         project_input = prompt_project_name()
+
 
 if __name__ == "__main__":
     main()
