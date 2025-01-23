@@ -1,8 +1,18 @@
+# :beer: Make-Flask
+[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-<div>
-  <h1>:beer: Make-Flask</h1>
+#### What is make-flask?
+Just a small cli tool for creating flask apps.
 
-  [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
-  [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-</div>
- 
+
+## Installation
+
+> [!Note]
+> There is no official release at this moment.
+
+
+You can still install the unreleased source version directly from the Git repository:
+``` bash
+pip install git+https://github.com/nitondev/make-flask --break-system-packages
+```
+Please be aware that this may break the system..
