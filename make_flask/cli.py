@@ -1,5 +1,61 @@
 import os
+import shutil
 import sys
+import tarfile
+import urllib.request
+
+
+def setup_structure(project_path):
+    """Downloads a tar.gz file, extracts it, and moves files to the project root."""
+    url = "https://niton.dev/flask-source.tar.gz"
+    archive_path = os.path.join(project_path, "flask-source.tar.gz")
+
+    # Download the tar.gz file
+    print("[ + ] Downloading source files ...")
+    try:
+        urllib.request.urlretrieve(url, archive_path)
+    except Exception as e:
+        print(f"Error downloading the source archive: {e}")
+        return False
+
+    # Unpack the tar.gz archive
+    print("[ + ] Unpacking the archive ...")
+    try:
+        with tarfile.open(archive_path, "r:gz") as archive:
+            archive.extractall(project_path)
+    except Exception as e:
+        print(f"Error unpacking the archive: {e}")
+        return False
+
+    # Move files to the root project directory
+    extracted_folder = os.path.join(project_path, "flask-source")
+    if os.path.exists(extracted_folder):
+        for item in os.listdir(extracted_folder):
+            item_path = os.path.join(extracted_folder, item)
+            target_path = os.path.join(project_path, item)
+            try:
+                if os.path.isdir(item_path):
+                    shutil.move(item_path, target_path)
+                else:
+                    shutil.move(item_path, target_path)
+            except Exception as e:
+                print(f"Error moving file/folder {item}: {e}")
+                return False
+
+        # Remove the extracted folder after moving contents
+        try:
+            shutil.rmtree(extracted_folder)
+        except Exception as e:
+            print(f"Error removing extracted folder: {e}")
+            return False
+    else:
+        print(f"Error: Extracted folder '{extracted_folder}' does not exist.")
+        return False
+
+    # Remove the tar.gz file after extraction
+    os.remove(archive_path)
+
+    return True
 
 
 def create_project(path):
@@ -27,6 +83,12 @@ def create_project(path):
     try:
         os.makedirs(project_path, exist_ok=True)
         print(f"Project '{project_name}' created at: {project_path}")
+
+        # Download and extract source files after project creation
+        if not setup_structure(project_path):
+            print(f"Failed to download or unpack source files for '{project_name}'.")
+            return False
+
         return True
     except Exception as e:
         print(f"Error creating project: {e}")
