@@ -21,7 +21,7 @@ def create_project(path):
     # Create the project directory
     project_path = os.path.join(parent_dir, project_name)
     if os.path.exists(project_path):
-        print(f"Error: Project '{project_name}' already exists at: {project_path}")
+        print(f"Error: Project '{project_name}' already exists.")
         return False
 
     try:

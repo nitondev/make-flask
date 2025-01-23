@@ -1,4 +1,23 @@
-[tool.black]
-line-length = 88
-skip-string-normalization = true
-target-version = ['py39']
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "make-flask"
+version = "1.0.0"
+description = "a cli tool for creating flask apps"
+readme = "README.md"
+authors = [
+    { name = "Lord J. Hackwell", email = "lordhck@niton.dev" }
+]
+license = { text = "MIT" }
+requires-python = ">=3.7"
+keywords = ["cli", "flask", "project-creator"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+make-flask = "make_flask.cli:main"
